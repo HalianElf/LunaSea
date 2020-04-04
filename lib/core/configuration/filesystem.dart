@@ -12,6 +12,9 @@ class Filesystem {
 
     static Future<String> get appDirectory async {
         Directory appDocDir = await getApplicationDocumentsDirectory();
+        if (Platform.isAndroid) {
+          appDocDir = await getExternalStorageDirectory();
+        }
         return '${appDocDir.path}';
     }
 
